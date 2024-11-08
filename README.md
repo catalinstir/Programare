@@ -1,6 +1,6 @@
 # Programarea calculatoarelor
 
-## Curs 1 - Introducere
+## [Curs 1 - Introducere](https://wiki.mta.ro/c/1/prog/curs/curs1)
 
 ### Key points of the C programming language
 - widely used 
@@ -40,18 +40,68 @@ int main(){
 ```
 ### Compiling of a C program
 ```
-+-------------+      +----------------+        Compiler        +--------------------+       Linker        +------------------+
-|   Editor    | ---> |  Source file   | ---------------------> |   Object file      | ------------------> |  Executable file |
-+-------------+      +----------------+        ^               |  (incomplete)      |   ^           ^     |  (complete,      |
-                                               |               +--------------------+   |           |     |   final)         |
-                                               |                                        |           |     +------------------+
-                                               |                                        |           |
-                                               |                                        |           |
-                                        +--------------+                    +----------------+     +----------------+
-                                        |              |                    |  Standard      |     | Other          |
-                                        |   Headers    |                    |  library       |     | libraries,     |
-                                        |              |                    |  (printf,      |     | object files   |
-                                        +--------------+                    |  scanf, etc.)  |     +----------------+
-                                                                            +----------------+
++----------------+        Compiler        +--------------------+       Linker        +------------------+
+|  Source file   | ---------------------> |   Object file      | ------------------> |  Executable file |
++----------------+        ^               |  (incomplete)      |   ^           ^     |  (complete,      |
+        ^                 |               +--------------------+   |           |     |   final)         |
+        |                 |                                        |           |     +------------------+
+        |                 |                                        |           |
+        |                 |                                        |           |
+ +------------+      +--------------+                    +----------------+     +----------------+
+ |            |      |              |                    |  Standard      |     | Other          |
+ |  Editor    |      |   Headers    |                    |  library       |     | libraries,     |
+ |            |      |              |                    |  (printf,      |     | object files   |
+ +------------+      +--------------+                    |  scanf, etc.)  |     +----------------+
+                                                         +----------------+
 
 ```
+### C vs Assembly
+```C
+// C //                 // Assembly (simplified)
+                    //  .bss
+int a, b;           //      dw a,b;
+int foo()           //  .code
+{                   //  foo:
+    if(a<b)         //      %function prolog%
+        return a;   //      mov     eax,dword prt[b]
+    else            //      cmp     eax,dword prt[a]
+        return b;   //      jl      L3
+}                   //      mov     eax,dword prt[b]
+                    //  L3:
+                    //      %function epilog%
+                    //      ret
+```
+### C Standard library (libc.lib)
+- Mathematical functions: **sqrt**, **pow**, **sin**, **tan**
+- Manipulating characters: **isdigit**, **isalpha**, **toupper**, **tolower**
+- Manipulating stirngs: **strlen**, **strcpy**, **strcmp**, **strcat**, **strstr**
+- Formatted I/O: **printf**, **scanf**, **sprintf**, **sscanf**
+- File I/O: **fopen**, **fclose**, **fgets**, **fputs**, **fseek**
+- Error handling: **assert**, **exit**
+- Time and Date functions: **clock**, **time**, **difftime**
+- Sort and search: **qsort**, **bsearch**
+- Low-level memory operations: **memcpy**, **memset**
+> [!NOTE]
+> Various header files must be included in the program source:
+> #include <stdio.h>
+> #include <stdlib.h>
+> #include <string.h>
+> #include <math.h>
+> #include <time.h>
+> . . .
+### The Structure of the C programs:
+- **Pre-Processor Directives**
+    - includes
+    - defines
+    - comments
+- **Program's global data**
+    - global variables
+- **Declarations**
+    - functions
+    - variables
+- **main() function**
+    - C program's starting point
+    - Executable's entry point
+    - Call other functions
+- **Other functions**
+    - each handles a specific task
